@@ -11,4 +11,5 @@
 N = int(input())
 lst = map(int,input().split())
 lst = list(lst)
+
 print(min(lst),max(lst))
