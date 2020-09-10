@@ -196,7 +196,8 @@ for j in range(case):
     print("[", end='')
     for i in range(len(lst)):
         if i == len(lst) - 1:
-            print(lst[i], end = '')
+            print(lst[i], end='')
         else:
             print("%s," %(lst[i]), end='')
     print("]")
+#성공
