@@ -151,53 +151,103 @@
 #런타임에러가 뜸
 #다시 출력부분 고쳐보자
 
+# import sys
+#
+# case = int(sys.stdin.readline())
+#
+# for j in range(case):
+#     func = sys.stdin.readline()
+#     N = sys.stdin.readline()
+#     lst = sys.stdin.readline()
+#     errplg = 0
+#     Rplg = 0
+#     Dplg = 0
+#     slice_front = 0
+#     if len(lst) > 2:
+#         if "," in lst:
+#             lst = list(map(int, lst[1:-2].split(",")))
+#         else:
+#             lst = list(map(int, lst[1:-2].split()))
+#     else:
+#         lst = list()
+#     for i in func:
+#         len_lst = len(lst)
+#         if i == "R":
+#             Rplg = Rplg + 1
+#         if i == "D":
+#             Dplg = Dplg+1
+#             if len_lst == 0 or Dplg > len_lst:
+#                 print("error")
+#                 errplg = errplg + 1
+#                 break
+#             if Rplg % 2 == 0:
+#                 slice_front = slice_front +1
+#             else:
+#                 lst.pop()
+#     if errplg != 0:
+#         continue
+#     else:
+#         if Rplg %2 == 0:
+#             lst = lst[slice_front:]
+#         else:
+#             lst = lst[slice_front:]
+#             lst.reverse()
+#
+#     print("[", end='')
+#     for i in range(len(lst)):
+#         if i == len(lst) - 1:
+#             print(lst[i], end='')
+#         else:
+#             print("%s," %(lst[i]), end='')
+#     print("]")
+#성공
+
+import re
 import sys
+from _collections import deque
 
-case = int(sys.stdin.readline())
+T = int(sys.stdin.readline())
 
-for j in range(case):
-    func = sys.stdin.readline()
-    N = sys.stdin.readline()
-    lst = sys.stdin.readline()
-    errplg = 0
-    Rplg = 0
-    Dplg = 0
-    slice_front = 0
-    if len(lst) > 2:
-        if "," in lst:
-            lst = list(map(int, lst[1:-2].split(",")))
-        else:
-            lst = list(map(int, lst[1:-2].split()))
-    else:
-        lst = list()
-    for i in func:
-        len_lst = len(lst)
-        if i == "R":
-            Rplg = Rplg + 1
-        if i == "D":
-            Dplg = Dplg+1
-            if len_lst == 0 or Dplg > len_lst:
-                print("error")
-                errplg = errplg + 1
+for i in range(T):
+    p = sys.stdin.readline()
+    n = int(sys.stdin.readline())
+    Str = sys.stdin.readline()
+    p = p.replace('RR', '')
+    lst = re.findall("\d+", Str)
+    D = deque()
+    Check = True
+    r = 0
+
+    for j in lst:
+        D.append(int(j))
+
+    for k in p:
+        if k =='R':
+            r += 1
+
+        elif k =='D':
+            if D.__len__() == 0:
+                Check = False
                 break
-            if Rplg % 2 == 0:
-                slice_front = slice_front +1
             else:
-                lst.pop()
-    if errplg != 0:
+                if r % 2 == 0:
+                    D.popleft()
+                else:
+                    D.pop()
+
+    if not Check:
+        print('error')
         continue
     else:
-        if Rplg %2 == 0:
-            lst = lst[slice_front:]
+        if r %2 == 0:
+            pass
         else:
-            lst = lst[slice_front:]
-            lst.reverse()
+            D.reverse()
 
     print("[", end='')
-    for i in range(len(lst)):
-        if i == len(lst) - 1:
-            print(lst[i], end='')
+    for i in range(len(D)):
+        if i == len(D) - 1:
+            print(D[i], end='')
         else:
-            print("%s," %(lst[i]), end='')
+            print("%s," %(D[i]), end='')
     print("]")
-#성공
