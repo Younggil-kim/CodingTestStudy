@@ -16,29 +16,39 @@
 # 그 다음 끝 시간을 배정하는데, 이 때 시작시간이 앞 시간과 겹치면 안됨
 # 이런식으로 배정해주면 될듯
 
-N = int(input())
+import sys
+
+N = int(sys.stdin.readline())
 lst = list()
 for i in range(N):
-    lst.append(input().split())
+    lst.append(list(map(int,sys.stdin.readline().split())))
 
-# lst = list(map(int,lst))
-for i in range(N):# 리스트 정수형 변환 한번에 할 수 있는 방법 찾아보자.
-    for j in range(2):
-        lst[i][j] = int(lst[i][j])
+lst.sort(key=lambda x:(x[1],x[0]))
 
+cnt = 1
+last_end_time = lst[0][1]
+for i in range(0,N-1):# 시작시간이 처음의 끝시간보다 작으면 안됨
+    if last_end_time <= lst[i+1][0]:
+        cnt = cnt + 1
+        last_end_time = lst[i+1][1]
 
-#끝 시간 정렬을 해 줘야 함.
-
-lst.sort(key=lambda x:(x[1], x[0]))#2중 정렬을 해 줘야해, 첫번째로 끝시간 두번쨰로 시작시간
-#왜냐하면 끝나는 시간이 같은데, 빨리 시작하는게 선택이 안되면 안되잖아
-
-#그럼 가장 빨리 끝나는 첫번째꺼를 그냥 잡아.
-first_end = lst[0][1]
-count = 1
-for i in range(1, N):#그리고, 시작 시간이, 끝나는 시간보다 같거나 큰걸 찾아.
-    if lst[i][0] >= first_end:
-        count = count + 1
-        first_end = lst[i][1]
+print(cnt)
 
 
-print(count)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
