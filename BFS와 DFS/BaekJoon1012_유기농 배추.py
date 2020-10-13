@@ -6,37 +6,37 @@
 # BFS로도 풀 수 있을 듯
 
 #dfs 풀이
-# import sys
-#
-# def dfs(x,y):
-#     if x < 0 or x >= N or y < 0 or y >= M:
-#         return False
-#     if lst[x][y] == 1:#배추가 있으면
-#         lst[x][y] = 2#방문 처리
-#         dfs(x+1,y)
-#         dfs(x-1,y)
-#         dfs(x,y-1)
-#         dfs(x,y+1)#4방향 재귀
-#         return True
-#     else:
-#         return False
-#
-# T = int(sys.stdin.readline())
-# sys.setrecursionlimit(3000)#이거 없으면 런타임
-#
-# for i in range(T):
-#     M, N, K = map(int,sys.stdin.readline().split())
-#     lst = [[0]*M for _ in range(N)]
-#     cnt = 0
-#     for j in range(K):
-#         a, b = map(int, sys.stdin.readline().split())
-#         lst[b][a] = 1
-#
-#     for l in range(N):
-#         for k in range(M):
-#             if dfs(l,k):
-#                 cnt = cnt + 1
-#     print(cnt)
+import sys
+
+def dfs(x,y):
+    if x < 0 or x >= N or y < 0 or y >= M:
+        return False
+    if lst[x][y] == 1:#배추가 있으면
+        lst[x][y] = 2#방문 처리
+        dfs(x+1,y)
+        dfs(x-1,y)
+        dfs(x,y-1)
+        dfs(x,y+1)#4방향 재귀
+        return True
+    else:
+        return False
+
+T = int(sys.stdin.readline())
+sys.setrecursionlimit(3000)#이거 없으면 런타임
+
+for i in range(T):
+    M, N, K = map(int,sys.stdin.readline().split())
+    lst = [[0]*M for _ in range(N)]
+    cnt = 0
+    for j in range(K):
+        a, b = map(int, sys.stdin.readline().split())
+        lst[b][a] = 1
+
+    for l in range(N):
+        for k in range(M):
+            if dfs(l,k):
+                cnt = cnt + 1
+    print(cnt)
 
 
 #bfs 풀이
