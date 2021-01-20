@@ -1,2 +1,2 @@
-a = 0
-print(~a)
+a = "abc"
+print(list(a))
