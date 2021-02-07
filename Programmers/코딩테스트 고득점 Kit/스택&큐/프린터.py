@@ -1,4 +1,6 @@
 from collections import deque
+
+
 def solution(priorities, location):
     answer = 1
     lst = deque()
