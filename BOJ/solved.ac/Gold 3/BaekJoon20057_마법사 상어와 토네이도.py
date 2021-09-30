@@ -1,3 +1,5 @@
+# 삼성 기출
+
 import sys
 input = sys.stdin.readline
 
